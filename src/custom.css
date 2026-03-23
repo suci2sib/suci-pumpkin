@@ -1,0 +1,126 @@
+/* 1. Global Reset & Body */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #2a303c; /* Sedikit lebih gelap & keabuan - Soft Dark Background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Inter', 'Segoe UI', sans-serif; /* Pake font 'Inter' biar lebih modern */
+  color: #e2e8f0; /* Soft Off-White Text */
+}
+
+/* 2. Container Utama & Kartu Portofolio */
+.main-container {
+  width: 100%;
+  max-width: 850px; /* Lebar pas ala gambar referensi */
+  padding: 20px;
+}
+
+.portfolio-card {
+  background-color: #ffffff; /* Putih bersih seperti di gambar */
+  color: #334155; /* Teks gelap di dalam kartu (biru tua abu) */
+  border-radius: 12px;
+  overflow: hidden; /* Biar header mint rapi di pojok atas */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* 3. Header Soft Mint/Teal */
+.portfolio-header {
+  background-color: #3f6e70; /* Soft Mint-Teal Header - Segar tapi kalem */
+  color: #f1f5f9;
+  padding: 45px 20px;
+  text-align: center;
+}
+
+.hero-name {
+  font-size: 3rem; /* Sedikit lebih besar */
+  font-weight: 800;
+  margin-bottom: 8px;
+  letter-spacing: -1px; /* Modern spacing */
+}
+
+.tagline {
+  font-size: 1.15rem;
+  opacity: 0.95;
+  font-weight: 500;
+}
+
+/* 4. Section Styles */
+.portfolio-section {
+  padding: 45px 30px; /* Padding samping lebih lega */
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.section-title {
+  font-size: 1.9rem;
+  color: #3f6e70; /* Pakai warna header untuk judul */
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+.content-text {
+  font-size: 1.1rem;
+  line-height: 1.7; /* Lebih lega untuk keterbacaan */
+  color: #475569;
+}
+
+/* 5. Proyek Grid & Cards (Rapi ala Gambar) */
+.proyek-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Kolom otomatis */
+  gap: 20px;
+}
+
+.proyek-card {
+  background-color: #f8fafc; /* Soft Gray Card Background */
+  padding: 25px;
+  border-radius: 8px;
+  border-left: 4px solid; /* Akses garis di kiri */
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0; /* Outline tipis */
+}
+
+.proyek-card:hover {
+  transform: translateY(-5px); /* Sedikit lebih tinggi */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  background-color: #f1f5f9; /* Berubah warna sedikit */
+}
+
+.card-teal-accent {
+  border-left-color: #4dbdc1; /* Soft Cyan/Mint Accent */
+}
+
+.proyek-card h3 {
+  font-size: 1.35rem;
+  color: #1e293b;
+  margin-bottom: 10px;
+}
+
+.proyek-card p {
+  color: #475569;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* 6. Utility Styles */
+.center-text {
+  text-align: center;
+}
+
+.org-list {
+  list-style: disc;
+  margin-left: 50px; /* Lebih ke dalam */
+  color: #475569;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.org-list strong {
+  color: #1e293b;
+}
