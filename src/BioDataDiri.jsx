@@ -44,7 +44,7 @@ const PengalamanOrganisasi = () => (
     <h2 className="section-title center-text">Pengalaman Organisasi</h2>
     <ul className="org-list">
       <li><strong>Pengurus PSM PCR</strong> - Divisi Kominfo (2025-2026).</li>
-      <li><strong>Pengurus Seni Tari PCR</strong> - Divisi Kominfo (2025-2026).</li>
+      <li><strong>Pengurus Seni PCR</strong> - Divisi Kominfo (2025-2026).</li>
     </ul>
   </div>
 );
