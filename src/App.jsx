@@ -10,10 +10,18 @@
 
 //export default App;
 
-import PendaftaranLoker from "./PendaftaranLoker";
+//import PendaftaranLoker from "./PendaftaranLoker";
+
+//function App() {
+  //return <PendaftaranLoker />;
+//}
+
+//export default App;
+
+import ServiceManager from "./pertemuan_4/ServiceManager";
 
 function App() {
-  return <PendaftaranLoker />;
+  return <ServiceManager />;
 }
 
 export default App;

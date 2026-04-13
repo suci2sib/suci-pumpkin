@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "nama_layanan": "Wedding Organizer Premium",
+    "kategori": "Wedding",
+    "deskripsi": "Paket lengkap pernikahan mewah dengan dekorasi eksklusif.",
+    "gambar": "https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "info_bisnis": { "vendor": "Suci Wedding", "tahun_berdiri": 2015, "website": "www.suciwedding.com" },
+    "harga": { "mulai_dari": 50000000, "mata_uang": "IDR", "pajak_incl": true },
+    "statistik": { "rating": 4.9, "klien_puas": 200, "status": "Tersedia" }
+  },
+  {
+    "id": 2,
+    "nama_layanan": "Ulang Tahun Anak Ceria",
+    "kategori": "Birthday",
+    "deskripsi": "Dekorasi balon dan badut untuk pesta ulang tahun anak.",
+    "gambar": "https://images.pexels.com/photos/1543767/pexels-photo-1543767.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "info_bisnis": { "vendor": "Kidz Party", "tahun_berdiri": 2019, "website": "www.kidzparty.id" },
+    "harga": { "mulai_dari": 5000000, "mata_uang": "IDR", "pajak_incl": true },
+    "statistik": { "rating": 4.7, "klien_puas": 450, "status": "Tersedia" }
+  },
+  {
+    "id": 3,
+    "nama_layanan": "Corporate Gathering",
+    "kategori": "Corporate",
+    "deskripsi": "Acara kantor formal maupun santai dengan fasilitas lengkap.",
+    "gambar": "https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "info_bisnis": { "vendor": "Pro Event", "tahun_berdiri": 2010, "website": "www.proevent.com" },
+    "harga": { "mulai_dari": 15000000, "mata_uang": "IDR", "pajak_incl": true },
+    "statistik": { "rating": 4.8, "klien_puas": 120, "status": "Tersedia" }
+  },
+  {
+    "id": 4,
+    "nama_layanan": "Konser Musik Indie",
+    "kategori": "Music",
+    "deskripsi": "Pengaturan panggung dan sound system kualitas tinggi.",
+    "gambar": "https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "info_bisnis": { "vendor": "SoundWave", "tahun_berdiri": 2012, "website": "www.soundwave.id" },
+    "harga": { "mulai_dari": 75000000, "mata_uang": "IDR", "pajak_incl": false },
+    "statistik": { "rating": 4.6, "klien_puas": 80, "status": "Penuh" }
+  },
+  {
+    "id": 5,
+    "nama_layanan": "Seminar Pendidikan",
+    "kategori": "Education",
+    "deskripsi": "Fasilitas seminar lengkap dengan konsumsi dan pemateri ahli.",
+    "gambar": "https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "info_bisnis": { "vendor": "EduEvent", "tahun_berdiri": 2020, "website": "www.eduevent.org" },
+    "harga": { "mulai_dari": 8000000, "mata_uang": "IDR", "pajak_incl": true },
+    "statistik": { "rating": 4.5, "klien_puas": 300, "status": "Tersedia" }
+  },
+  {
+    "id": 6,
+    "nama_layanan": "Tunangan Sederhana",
+    "kategori": "Wedding",
+    "deskripsi": "Dekorasi tunangan minimalis nan elegan di rumah atau cafe.",
+    "gambar": "https://images.pexels.com/photos/265722/pexels-photo-265722.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "info_bisnis": { "vendor": "Suci Wedding", "tahun_berdiri": 2015, "website": "www.suciwedding.com" },
+    "harga": { "mulai_dari": 3000000, "mata_uang": "IDR", "pajak_incl": true },
+    "statistik": { "rating": 4.9, "klien_puas": 150, "status": "Tersedia" }
+  },
+  {
+    "id": 7,
+    "nama_layanan": "Pameran Seni",
+    "kategori": "Exhibition",
+    "deskripsi": "Display lukisan dan instalasi seni profesional untuk galeri.",
+    "gambar": "https://images.pexels.com/photos/20967/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=400",
+    "info_bisnis": { "vendor": "ArtSpace", "tahun_berdiri": 2017, "website": "www.artspace.id" },
+    "harga": { "mulai_dari": 20000000, "mata_uang": "IDR", "pajak_incl": true },
+    "statistik": { "rating": 4.8, "klien_puas": 55, "status": "Tersedia" }
+  },
+  {
+    "id": 8,
+    "nama_layanan": "Product Launching",
+    "kategori": "Corporate",
+    "deskripsi": "Promosi produk baru untuk brand ternama dengan media coverage.",
+    "gambar": "https://images.pexels.com/photos/269077/pexels-photo-269077.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "info_bisnis": { "vendor": "BrandBoost", "tahun_berdiri": 2014, "website": "www.brandboost.com" },
+    "harga": { "mulai_dari": 45000000, "mata_uang": "IDR", "pajak_incl": true },
+    "statistik": { "rating": 4.7, "klien_puas": 90, "status": "Tersedia" }
+  },
+  {
+    "id": 9,
+    "nama_layanan": "Acara Wisuda",
+    "kategori": "Education",
+    "deskripsi": "Dokumentasi dan panggung wisuda sekolah atau universitas.",
+    "gambar": "https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "info_bisnis": { "vendor": "GraduationPro", "tahun_berdiri": 2011, "website": "www.gradpro.id" },
+    "harga": { "mulai_dari": 12000000, "mata_uang": "IDR", "pajak_incl": true },
+    "statistik": { "rating": 4.6, "klien_puas": 210, "status": "Tersedia" }
+  },
+  {
+    "id": 10,
+    "nama_layanan": "Dinner Romantis",
+    "kategori": "Private",
+    "deskripsi": "Makan malam berdua di rooftop eksklusif dengan dekorasi bunga.",
+    "gambar": "https://images.pexels.com/photos/2306281/pexels-photo-2306281.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "info_bisnis": { "vendor": "LoveStory", "tahun_berdiri": 2021, "website": "www.lovestory.com" },
+    "harga": { "mulai_dari": 2500000, "mata_uang": "IDR", "pajak_incl": true },
+    "statistik": { "rating": 5.0, "klien_puas": 60, "status": "Tersedia" }
+  },
+  {
+    "id": 11,
+    "nama_layanan": "Catering Pernikahan",
+    "kategori": "Wedding",
+    "deskripsi": "Menu prasmanan Nusantara dan Internasional bahan premium.",
+    "gambar": "https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg?auto=compress&cs=tinysrgb&w=400",
+    "info_bisnis": { "vendor": "TastyFood", "tahun_berdiri": 2008, "website": "www.tastyfood.com" },
+    "harga": { "mulai_dari": 35000000, "mata_uang": "IDR", "pajak_incl": true },
+    "statistik": { "rating": 4.8, "klien_puas": 600, "status": "Tersedia" }
+  },
+  {
+    "id": 12,
+    "nama_layanan": "Fotografi Prewedding",
+    "kategori": "Wedding",
+    "deskripsi": "Sesi foto outdoor dan studio bertema unik dan sinematik.",
+    "gambar": "https://images.pexels.com/photos/1456613/pexels-photo-1456613.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "info_bisnis": { "vendor": "SnapShot", "tahun_berdiri": 2016, "website": "www.snapshot.id" },
+    "harga": { "mulai_dari": 4500000, "mata_uang": "IDR", "pajak_incl": true },
+    "statistik": { "rating": 4.9, "klien_puas": 320, "status": "Tersedia" }
+  },
+  {
+    "id": 13,
+    "nama_layanan": "Sweet Seventeen",
+    "kategori": "Birthday",
+    "deskripsi": "Pesta ulang tahun ke-17 dengan DJ, lighting, dan photobooth.",
+    "gambar": "https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "info_bisnis": { "vendor": "Kidz Party", "tahun_berdiri": 2019, "website": "www.kidzparty.id" },
+    "harga": { "mulai_dari": 10000000, "mata_uang": "IDR", "pajak_incl": true },
+    "statistik": { "rating": 4.7, "klien_puas": 180, "status": "Tersedia" }
+  },
+  {
+    "ID": 14,
+    "nama_layanan": "Workshop Kerajinan",
+    "kategori": "Education",
+    "deskripsi": "Belajar membuat keramik dan seni kriya bersama pengrajin.",
+    "gambar": "https://images.pexels.com/photos/4604598/pexels-photo-4604598.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "info_bisnis": { "vendor": "CraftyHand", "tahun_berdiri": 2022, "website": "www.craftyhand.id" },
+    "harga": { "mulai_dari": 1500000, "mata_uang": "IDR", "pajak_incl": true },
+    "statistik": { "rating": 4.9, "klien_puas": 40, "status": "Tersedia" }
+  },
+  {
+    "id": 15,
+    "nama_layanan": "Event Olahraga",
+    "kategori": "Sport",
+    "deskripsi": "Penyelenggaraan lari maraton, futsal, dan kompetisi lainnya.",
+    "gambar": "https://images.pexels.com/photos/2280547/pexels-photo-2280547.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "info_bisnis": { "vendor": "Sporta", "tahun_berdiri": 2013, "website": "www.sporta.com" },
+    "harga": { "mulai_dari": 30000000, "mata_uang": "IDR", "pajak_incl": false },
+    "statistik": { "rating": 4.4, "klien_puas": 35, "status": "Penuh" }
+  },
+  {
+    "id": 16,
+    "nama_layanan": "Gathering Komunitas",
+    "kategori": "Social",
+    "deskripsi": "Acara kumpul komunitas hobi dan sosial di lokasi outdoor.",
+    "gambar": "https://images.pexels.com/photos/1157557/pexels-photo-1157557.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "info_bisnis": { "vendor": "Socialite", "tahun_berdiri": 2018, "website": "www.socialite.id" },
+    "harga": { "mulai_dari": 5000000, "mata_uang": "IDR", "pajak_incl": true },
+    "statistik": { "rating": 4.6, "klien_puas": 110, "status": "Tersedia" }
+  },
+  {
+    "id": 17,
+    "nama_layanan": "Webinar Nasional",
+    "kategori": "Education",
+    "deskripsi": "Platform webinar dengan pembicara ahli dan sertifikat digital.",
+    "gambar": "https://images.pexels.com/photos/4144923/pexels-photo-4144923.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "info_bisnis": { "vendor": "EduEvent", "tahun_berdiri": 2020, "website": "www.eduevent.org" },
+    "harga": { "mulai_dari": 2000000, "mata_uang": "IDR", "pajak_incl": true },
+    "statistik": { "rating": 4.7, "klien_puas": 500, "status": "Tersedia" }
+  },
+  {
+    "id": 18,
+    "nama_layanan": "Pesta Tahun Baru",
+    "kategori": "Celebration",
+    "deskripsi": "Kembang api, musik live, dan gala dinner akhir tahun.",
+    "gambar": "https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "info_bisnis": { "vendor": "SoundWave", "tahun_berdiri": 2012, "website": "www.soundwave.id" },
+    "harga": { "mulai_dari": 100000000, "mata_uang": "IDR", "pajak_incl": true },
+    "statistik": { "rating": 4.9, "klien_puas": 25, "status": "Penuh" }
+  },
+  {
+    "ID": 19,
+    "nama_layanan": "Baby Shower",
+    "kategori": "Social",
+    "deskripsi": "Syukuran menyambut kelahiran buah hati dengan tema pastel.",
+    "gambar": "https://images.pexels.com/photos/5851493/pexels-photo-5851493.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "info_bisnis": { "vendor": "Kidz Party", "tahun_berdiri": 2019, "website": "www.kidzparty.id" },
+    "harga": { "mulai_dari": 4000000, "mata_uang": "IDR", "pajak_incl": true },
+    "statistik": { "rating": 4.8, "klien_puas": 75, "status": "Tersedia" }
+  },
+  {
+    "id": 20,
+    "nama_layanan": "Pelatihan Barista",
+    "kategori": "Education",
+    "deskripsi": "Kursus meracik kopi dari hulu ke hilir dengan alat profesional.",
+    "gambar": "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "info_bisnis": { "vendor": "CoffeeAcademy", "tahun_berdiri": 2023, "website": "www.coffeeaca.id" },
+    "harga": { "mulai_dari": 3000000, "mata_uang": "IDR", "pajak_incl": true },
+    "statistik": { "rating": 5.0, "klien_puas": 20, "status": "Tersedia" }
+  }
+]
