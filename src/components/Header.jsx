@@ -1,59 +1,42 @@
-// Ganti bagian import ini agar tidak error
-import { FaBell, FaSearch, FaCommentDots, FaGift, FaCog } from "react-icons/fa";
+import { FaSearch, FaBell, FaQuestionCircle, FaCog } from "react-icons/fa";
 
 export default function Header() {
-    return (
-        <div id="header-container" className="flex justify-between items-center p-6 bg-[#F8F9FB]">
-            {/* 1. SEARCH BAR */}
-            <div id="search-bar" className="relative w-full max-w-md">
-                <input
-                    id="search-input"
-                    type="text"
-                    placeholder="Search Here..."
-                    className="w-full bg-white border-none py-3 pl-5 pr-12 rounded-xl shadow-sm outline-none focus:ring-2 focus:ring-emerald-500 transition-all text-sm"
-                />
-                <FaSearch className="absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-300" />
-            </div>
+  return (
+    <div className="h-20 bg-white/80 backdrop-blur-md sticky top-0 flex items-center justify-between px-10 z-40 border-b border-gray-50">
+      {/* Search Section */}
+      <div className="relative w-72 group">
+        <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300 group-focus-within:text-pink-400 transition-colors" />
+        <input 
+          type="text" 
+          placeholder="Search..." 
+          className="w-full py-2 pl-12 pr-4 bg-gray-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-pink-100 transition-all outline-none"
+        />
+      </div>
 
-            {/* 2. ICONS & PROFILE SECTION */}
-            <div id="icons-container" className="flex items-center space-x-3">
-                
-                {/* Notification Icons */}
-                <div className="flex items-center space-x-2 mr-2">
-                    <div className="relative p-3 bg-blue-50 text-blue-400 rounded-xl cursor-pointer">
-                        <FaBell size={18} />
-                        <span className="absolute top-2 right-2 w-4 h-4 bg-blue-500 text-white text-[10px] flex items-center justify-center rounded-full border-2 border-white font-bold">
-                            50
-                        </span>
-                    </div>
-                    
-                    {/* Menggunakan FaCommentDots dan FaGift (tanpa 'Reg') */}
-                    <div className="p-3 bg-blue-50 text-blue-400 rounded-xl cursor-pointer"><FaCommentDots size={18} /></div>
-                    <div className="p-3 bg-blue-50 text-blue-400 rounded-xl cursor-pointer"><FaGift size={18} /></div>
-                    <div className="p-3 bg-red-50 text-red-400 rounded-xl cursor-pointer"><FaCog size={18} /></div>
-                </div>
-
-                {/* --- PROFILE SECTION --- */}
-                <div id="profile-container" className="flex items-center space-x-4 border-l pl-6 border-gray-200 ml-2">
-                    <div className="text-right flex flex-col justify-center">
-                        <span className="text-[11px] text-gray-400 leading-none">Hello,</span>
-                        <span className="text-sm font-bold text-gray-800">Suci Ramadani</span>
-                    </div>
-                    
-                    <div className="relative group cursor-pointer">
-                        <img
-                            id="fotoucii"
-                            src="/img/fotoucii.jpeg" 
-                            alt="Suci Profile"
-                            className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-md"
-                            onError={(e) => { 
-                                e.target.src = "https://ui-avatars.com/api/?name=Suci+Ramadani&background=10b981&color=fff"; 
-                            }}
-                        />
-                        <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full"></span>
-                    </div>
-                </div>
-            </div>
+      {/* Right Icons & Profile */}
+      <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 text-gray-400 border-r pr-6 border-gray-100">
+          <FaQuestionCircle className="cursor-pointer hover:text-pink-500 transition-colors" />
+          <div className="relative cursor-pointer">
+            <FaBell className="hover:text-pink-500 transition-colors" />
+            <span className="absolute -top-1 -right-1 w-2 h-2 bg-pink-500 rounded-full border-2 border-white"></span>
+          </div>
+          <FaCog className="cursor-pointer hover:text-pink-500 transition-colors" />
         </div>
-    );
+
+        <div className="flex items-center gap-3">
+          <div className="text-right">
+            <p className="text-sm font-bold text-gray-800">Suci Ramadani</p>
+            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Admin</p>
+          </div>
+          <img 
+            src="/img/fotoucii.jpeg" 
+            className="w-10 h-10 rounded-full border-2 border-pink-100 object-cover shadow-sm"
+            alt="profile"
+            onError={(e) => e.target.src = "https://ui-avatars.com/api/?name=Suci&background=ec4899&color=fff"}
+          />
+        </div>
+      </div>
+    </div>
+  );
 }

@@ -1,128 +1,50 @@
-import { NavLink } from "react-router-dom"; 
-import {
-  MdSpaceDashboard,
-  MdListAlt,
-  MdPeople,
-  MdAdd,
-  MdErrorOutline, // Untuk Error 400
-  MdLockOutline,  // Untuk Error 401
-  MdBlock,        // Untuk Error 403
+import { NavLink } from "react-router-dom";
+import { 
+  MdDashboard, MdReceipt, MdPeople, 
+  MdError, MdLock, MdBlock, MdAdd 
 } from "react-icons/md";
 
 export default function Sidebar() {
-  // Implementasi menuClass untuk Active State
-  const menuClass = ({ isActive }) =>
-    `flex cursor-pointer items-center rounded-xl p-4 space-x-2 transition-all
-    ${isActive ? 
-        "text-hijau bg-pink-100 font-extrabold shadow-sm" : 
-        "text-gray-500 hover:text-hijau hover:bg-pink-50"
-    }`;
-
-  const handleAddMenus = () => {
-    alert("Navigasi ke halaman Tambah Menu!");
-  };
+  const activeClass = "flex items-center px-6 py-3 text-pink-600 bg-pink-50 border-r-4 border-pink-500 font-bold transition-all";
+  const inactiveClass = "flex items-center px-6 py-3 text-gray-400 hover:text-pink-500 hover:bg-gray-50 transition-all font-medium";
 
   return (
-    <div
-      id="sidebar"
-      className="flex min-h-screen w-80 flex-col bg-white p-8 shadow-xl z-20"
-    >
-      {/* Logo Section */}
-      <div id="sidebar-logo" className="flex flex-col mb-10">
-        <span
-          id="logo-title"
-          className="font-poppins text-[40px] text-gray-900 font-bold leading-tight"
-        >
-          LaundryPro <b id="logo-dot" className="text-hijau">.</b>
-        </span>
-        <span
-          id="logo-subtitle"
-          className="font-semibold text-gray-400 text-xs font-barlow tracking-wider"
-        >
-          Laundry Management System
-        </span>
-      </div>
-
-      {/* List Menu Section */}
-      <div id="sidebar-menu" className="flex-1 overflow-y-auto">
-        <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-4 ml-4">Main Menu</p>
-        <ul id="menu-list" className="space-y-2">
-          
-          <li>
-            <NavLink id="menu-1" to="/" className={menuClass}>
-              <MdSpaceDashboard className="text-xl" />
-              <span>Dashboard</span>
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink id="menu-2" to="/orders" className={menuClass}>
-              <MdListAlt className="text-xl" />
-              <span>Order</span>
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink id="menu-3" to="/customers" className={menuClass}>
-              <MdPeople className="text-xl" />
-              <span>Customer</span>
-            </NavLink>
-          </li>
-
-          {/* --- SECTION ERROR PAGES (LATIHAN) --- */}
-          <div className="pt-6 mt-6 border-t border-gray-100">
-            <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-4 ml-4">Error Tests</p>
-            
-            <li>
-              <NavLink id="menu-error-400" to="/error-400" className={menuClass}>
-                <MdErrorOutline className="text-xl" />
-                <span>Error 400</span>
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink id="menu-error-401" to="/error-401" className={menuClass}>
-                <MdLockOutline className="text-xl" />
-                <span>Error 401</span>
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink id="menu-error-403" to="/error-403" className={menuClass}>
-                <MdBlock className="text-xl" />
-                <span>Error 403</span>
-              </NavLink>
-            </li>
-          </div>
-        </ul>
-      </div>
-
-      {/* Footer Section */}
-      <div id="sidebar-footer" className="mt-8">
-        <div
-          id="footer-card"
-          className="bg-hijau p-6 rounded-3xl shadow-lg flex flex-col items-center text-center relative overflow-hidden text-white mb-6"
-        >
-          <p className="text-xs font-barlow mb-4 z-10 leading-tight">
-            Please organize your menus through button below!
-          </p>
-
-          <button
-            onClick={handleAddMenus}
-            className="bg-white text-gray-800 px-6 py-2 rounded-xl font-bold text-xs z-10 shadow-md cursor-pointer hover:bg-gray-100 flex items-center space-x-2 transition-all active:scale-95"
-          >
-            <MdAdd className="text-lg" />
-            <span>Add Menus</span>
-          </button>
+    <div className="fixed left-0 top-0 h-screen w-64 bg-white border-r border-gray-100 flex flex-col z-50">
+      {/* Brand Logo */}
+      <div className="p-8 flex items-center gap-3">
+        <div className="w-8 h-8 bg-pink-500 rounded-lg flex items-center justify-center text-white shadow-lg shadow-pink-200">
+          <MdDashboard size={20} />
         </div>
+        <span className="text-xl font-black text-gray-800 tracking-tight">Uci Laundry</span>
+      </div>
 
-        <div className="text-center">
-          <span id="footer-brand" className="font-bold text-gray-400 block text-[10px]">
-            LaundryPro Laundry Management System
-          </span>
-          <p id="footer-copyright" className="text-gray-400 text-[9px] mt-1">
-            &copy; 2026 All Rights Reserved
-          </p>
+      {/* Navigation Menu */}
+      <nav className="flex-1 space-y-1">
+        <NavLink to="/" className={({ isActive }) => isActive ? activeClass : inactiveClass}>
+          <MdDashboard className="mr-3" size={22} /> Dashboard
+        </NavLink>
+        <NavLink to="/orders" className={({ isActive }) => isActive ? activeClass : inactiveClass}>
+          <MdReceipt className="mr-3" size={22} /> Orders
+        </NavLink>
+        <NavLink to="/customers" className={({ isActive }) => isActive ? activeClass : inactiveClass}>
+          <MdPeople className="mr-3" size={22} /> Customers
+        </NavLink>
+
+        <div className="pt-10 px-6 pb-2">
+          <span className="text-[10px] font-black text-gray-300 uppercase tracking-widest">Error Tests</span>
+        </div>
+        <NavLink to="/400" className={inactiveClass}><MdError className="mr-3" size={20} /> Error 400</NavLink>
+        <NavLink to="/401" className={inactiveClass}><MdLock className="mr-3" size={20} /> Error 401</NavLink>
+        <NavLink to="/403" className={inactiveClass}><MdBlock className="mr-3" size={20} /> Error 403</NavLink>
+      </nav>
+
+      {/* Footer Button */}
+      <div className="p-6">
+        <div className="bg-pink-50 p-4 rounded-2xl border border-pink-100 text-center">
+            <p className="text-[10px] font-bold text-pink-400 uppercase mb-3">v4.0 Premium</p>
+            <button className="w-full py-2.5 bg-pink-500 text-white rounded-xl text-xs font-bold shadow-md shadow-pink-100 hover:bg-pink-600 transition-all flex items-center justify-center gap-2">
+                <MdAdd size={16}/> Add Dashlet
+            </button>
         </div>
       </div>
     </div>

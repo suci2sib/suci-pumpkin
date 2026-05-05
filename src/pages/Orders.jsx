@@ -1,18 +1,24 @@
 import { useState } from "react";
-import { FaShoppingCart, FaCheckCircle, FaBan, FaDollarSign, FaPlus, FaTimes, FaEye } from "react-icons/fa";
-import PageHeader from "../components/PageHeader";
+import { FaShoppingCart, FaCheckCircle, FaBan, FaDollarSign, FaPlus, FaTimes, FaEye, FaEllipsisV } from "react-icons/fa";
 import { ordersData } from "../data/mockData";
 
 export default function Orders() {
   const [orders, setOrders] = useState(ordersData);
   const [showModal, setShowModal] = useState(false);
-  const [selectedOrder, setSelectedOrder] = useState(null); // State untuk Detail Pesanan
-  const [newOrder, setNewOrder] = useState({ customerName: "", serviceType: "Wash & Fold", weight: "", pickupDate: "", totalPrice: "" });
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [newOrder, setNewOrder] = useState({ 
+    customerName: "", 
+    serviceType: "Wash & Fold", 
+    weight: "", 
+    pickupDate: "", 
+    totalPrice: "", 
+    status: "Pending" 
+  });
 
   const stats = [
     { id: "loads", label: "Total Laundry Loads", value: "75", icon: <FaShoppingCart />, color: "bg-pink-500" },
     { id: "completed", label: "Services Completed", value: "357", icon: <FaCheckCircle />, color: "bg-pink-500" },
-    { id: "canceled", label: "Canceled Orders", value: "65", icon: <FaBan />, color: "bg-red-500" },
+    { id: "canceled", label: "Canceled Orders", value: "65", icon: <FaBan />, color: "bg-red-400" },
     { id: "revenue", label: "Monthly Revenue", value: "$128", icon: <FaDollarSign />, color: "bg-pink-500" },
   ];
 
@@ -21,192 +27,79 @@ export default function Orders() {
     const dataBaru = { ...newOrder, id: (orders.length + 1).toString() };
     setOrders([dataBaru, ...orders]);
     setShowModal(false);
-    setNewOrder({ customerName: "", serviceType: "Wash & Fold", weight: "", pickupDate: "", totalPrice: "" });
+    setNewOrder({ customerName: "", serviceType: "Wash & Fold", weight: "", pickupDate: "", totalPrice: "", status: "Pending" });
   };
 
   return (
-    <div id="orders-container" className="bg-[#F8F9FB] min-h-screen p-8 font-barlow relative">
-      <PageHeader title="Laundry Orders" breadcrumb="Laundry Orders">
-        <button onClick={() => setShowModal(true)} className="bg-hijau text-white px-6 py-3 rounded-2xl font-bold flex items-center space-x-2 shadow-lg hover:scale-105 transition-all active:scale-95">
-          <FaPlus /> <span>Add Laundry Order</span>
+    <div className="bg-[#F8F9FB] min-h-screen p-10 ml-64 font-sans relative">
+      {/* HEADER SECTION */}
+      <div className="flex justify-between items-end mb-10">
+        <div>
+          <h1 className="text-3xl font-black text-gray-900 mb-1">Laundry Orders</h1>
+          <p className="text-gray-400 text-sm font-medium">Manage and track your customer laundry process</p>
+        </div>
+        <button 
+          onClick={() => setShowModal(true)} 
+          className="flex items-center gap-2 px-6 py-3 bg-pink-500 text-white rounded-2xl shadow-lg shadow-pink-100 text-sm font-bold hover:bg-pink-600 transition-all active:scale-95"
+        >
+          <FaPlus /> Add New Order
         </button>
-      </PageHeader>
+      </div>
 
-      {/* 1. MODAL FORM ADD ORDER */}
-      {showModal && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-          <div className="bg-white w-full max-w-md rounded-[2.5rem] p-10 shadow-2xl relative animate-in fade-in zoom-in duration-300">
-            <button onClick={() => setShowModal(false)} className="absolute top-6 right-6 text-gray-400 hover:text-red-500 transition-colors">
-              <FaTimes />
-            </button>
-            <h2 className="text-2xl font-black text-gray-800 mb-2">New Laundry Order</h2>
-            <p className="text-gray-400 text-sm mb-8 font-medium">Input detail laundry order baru ke sistem.</p>
-
-            <form onSubmit={handleSave} className="space-y-4">
-              <div>
-                <label className="text-[10px] font-black uppercase text-gray-400 ml-2 tracking-widest">Customer Name</label>
-                <input required type="text" placeholder="Masukkan nama pelanggan" className="w-full bg-gray-50 border-none rounded-2xl p-4 mt-1 focus:ring-2 focus:ring-hijau" 
-                  onChange={(e) => setNewOrder({...newOrder, customerName: e.target.value})} />
-              </div>
-              <div>
-                <label className="text-[10px] font-black uppercase text-gray-400 ml-2 tracking-widest">Service Type</label>
-                <select className="w-full bg-gray-50 border-none rounded-2xl p-4 mt-1 focus:ring-2 focus:ring-hijau text-gray-600 font-medium" 
-                  onChange={(e) => setNewOrder({...newOrder, serviceType: e.target.value})}>
-                  <option>Wash & Fold</option>
-                  <option>Dry Clean</option>
-                  <option>Wash Only</option>
-                  <option>Ironing</option>
-                </select>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-[10px] font-black uppercase text-gray-400 ml-2 tracking-widest">Weight (kg)</label>
-                  <input required type="number" placeholder="5.0" className="w-full bg-gray-50 border-none rounded-2xl p-4 mt-1 focus:ring-2 focus:ring-hijau" 
-                    onChange={(e) => setNewOrder({...newOrder, weight: e.target.value})} />
-                </div>
-                <div>
-                  <label className="text-[10px] font-black uppercase text-gray-400 ml-2 tracking-widest">Pickup Date</label>
-                  <input required type="date" className="w-full bg-gray-50 border-none rounded-2xl p-4 mt-1 focus:ring-2 focus:ring-hijau" 
-                    onChange={(e) => setNewOrder({...newOrder, pickupDate: e.target.value})} />
-                </div>
-              </div>
-              <div>
-                <label className="text-[10px] font-black uppercase text-gray-400 ml-2 tracking-widest">Total Price ($)</label>
-                <input required type="number" placeholder="0.00" className="w-full bg-gray-50 border-none rounded-2xl p-4 mt-1 focus:ring-2 focus:ring-hijau" 
-                  onChange={(e) => setNewOrder({...newOrder, totalPrice: e.target.value})} />
-              </div>
-              <button type="submit" className="w-full bg-hijau text-white font-black py-4 rounded-2xl shadow-lg shadow-pink-100 mt-4 hover:bg-pink-600 transition-all">
-                Save Laundry Order
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {/* 2. MODAL DETAIL ORDER */}
-      {selectedOrder && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-          <div className="bg-white w-full max-w-md rounded-[2.5rem] p-10 shadow-2xl relative animate-in fade-in zoom-in duration-300">
-            <button onClick={() => setSelectedOrder(null)} className="absolute top-6 right-6 text-gray-400 hover:text-red-500 transition-colors">
-              <FaTimes />
-            </button>
-            
-            <div className="flex items-center space-x-4 mb-8">
-              <div className="w-14 h-14 bg-hijau text-white rounded-2xl flex items-center justify-center text-xl shadow-lg shadow-green-100">
-                <FaShoppingCart />
-              </div>
-              <div>
-                <h2 className="text-xl font-black text-gray-900">Order #{selectedOrder.id}</h2>
-                <p className="text-gray-400 font-bold text-[10px] uppercase tracking-[0.2em]">Transaction Detail</p>
-              </div>
-            </div>
-
-            <div className="bg-gray-50 rounded-[2rem] p-6 space-y-4 border border-gray-100">
-              <div className="flex justify-between border-b border-gray-200 pb-3">
-                <span className="text-[10px] font-black text-gray-400 uppercase">Customer</span>
-                <span className="font-bold text-gray-800">{selectedOrder.customerName}</span>
-              </div>
-              <div className="flex justify-between border-b border-gray-200 pb-3">
-                <span className="text-[10px] font-black text-gray-400 uppercase">Service Type</span>
-                <span className="font-bold text-gray-800">{selectedOrder.serviceType}</span>
-              </div>
-              <div className="flex justify-between border-b border-gray-200 pb-3">
-                <span className="text-[10px] font-black text-gray-400 uppercase">Weight</span>
-                <span className="font-bold text-gray-800">{selectedOrder.weight} kg</span>
-              </div>
-              <div className="flex justify-between border-b border-gray-200 pb-3">
-                <span className="text-[10px] font-black text-gray-400 uppercase">Pickup Date</span>
-                <span className="font-bold text-gray-800">{selectedOrder.pickupDate}</span>
-              </div>
-              <div className="flex justify-between border-b border-gray-200 pb-3">
-                <span className="text-[10px] font-black text-gray-400 uppercase">Status</span>
-                <span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase ${
-                    selectedOrder.status === 'Completed' ? 'bg-green-100 text-green-600' : 
-                    selectedOrder.status === 'Pending' ? 'bg-yellow-100 text-yellow-600' : 'bg-red-100 text-red-600'
-                }`}>{selectedOrder.status}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-[10px] font-black text-gray-400 uppercase">Total Amount</span>
-                <span className="font-black text-hijau">${selectedOrder.totalPrice}</span>
-              </div>
-            </div>
-
-            <button 
-              onClick={() => setSelectedOrder(null)}
-              className="w-full mt-8 bg-gray-900 text-white font-black py-4 rounded-2xl hover:bg-gray-800 transition-all shadow-xl"
-            >
-              Done
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* 3. STATS CARDS */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10 mt-6 animate-in slide-in-from-bottom duration-500">
+      {/* STATS CARDS */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
         {stats.map((item) => (
-          <div key={item.id} className="bg-white rounded-[2rem] p-6 shadow-sm border border-gray-50 flex items-center space-x-4">
-            <div className={`${item.color} w-12 h-12 rounded-2xl flex items-center justify-center text-white text-xl shadow-lg`}>
-              {item.icon}
-            </div>
+          <div key={item.id} className="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-50 flex items-center gap-4">
+            <div className={`${item.color} w-12 h-12 rounded-2xl flex items-center justify-center text-white text-lg shadow-md`}>{item.icon}</div>
             <div>
-              <span className="text-2xl font-black text-gray-800 block leading-none">{item.value}</span>
-              <span className="text-gray-400 text-[10px] font-black uppercase tracking-widest">{item.label}</span>
+              <p className="text-2xl font-black text-gray-800 leading-none">{item.value}</p>
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">{item.label}</p>
             </div>
           </div>
         ))}
       </div>
 
-      {/* 4. TABLE DATA */}
-      <div className="bg-white rounded-[2.5rem] p-8 shadow-sm border border-gray-50 overflow-hidden animate-in fade-in duration-700">
+      {/* DATA TABLE */}
+      <div className="bg-white rounded-[2.5rem] p-8 shadow-sm border border-gray-50 overflow-hidden">
+        <div className="flex justify-between items-center mb-8 px-2">
+            <h3 className="font-black text-gray-800">Recent Transactions</h3>
+            <FaEllipsisV className="text-gray-300 cursor-pointer" />
+        </div>
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-separate border-spacing-y-3">
+          <table className="w-full text-left border-separate border-spacing-y-4">
             <thead>
               <tr className="text-gray-400 text-[10px] font-black uppercase tracking-[0.2em]">
-                <th className="pb-4 pl-4">Order ID</th>
-                <th className="pb-4">Customer</th>
-                <th className="pb-4">Service</th>
-                <th className="pb-4">Weight</th>
-                <th className="pb-4">Pickup Date</th>
-                <th className="pb-4">Status</th>
-                <th className="pb-4">Price</th>
-                <th className="pb-4 text-center">Action</th>
+                <th className="pl-6 pb-2">Order ID</th>
+                <th className="pb-2">Customer</th>
+                <th className="pb-2">Service</th>
+                <th className="pb-2">Weight</th>
+                <th className="pb-2 text-center">Status</th>
+                <th className="pb-2">Total</th>
+                <th className="pb-2 text-center">Action</th>
               </tr>
             </thead>
             <tbody>
               {orders.map((order) => (
-                <tr key={order.id} className="group hover:bg-gray-50 transition-all duration-300">
-                  <td className="py-5 pl-4 font-black text-hijau bg-gray-50/50 rounded-l-2xl group-hover:bg-white transition-colors">
-                    #{order.id}
-                  </td>
-                  <td className="py-5 font-bold text-gray-800 group-hover:translate-x-1 transition-transform">
-                    {order.customerName}
-                  </td>
-                  <td className="py-5 font-medium text-gray-700">
-                    {order.serviceType}
-                  </td>
-                  <td className="py-5 font-bold text-gray-800">
-                    {order.weight} kg
-                  </td>
-                  <td className="py-5 font-medium text-gray-700">
-                    {order.pickupDate}
-                  </td>
-                  <td className="py-5">
-                    <span className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider ${
-                      order.status === 'Completed' ? 'bg-green-100 text-green-600 shadow-sm shadow-green-50' : 
-                      order.status === 'Pending' ? 'bg-yellow-100 text-yellow-600 shadow-sm shadow-yellow-50' : 'bg-red-100 text-red-600 shadow-sm shadow-red-50'
+                <tr key={order.id} className="group transition-all">
+                  <td className="py-5 pl-6 font-black text-pink-500 bg-gray-50 rounded-l-2xl group-hover:bg-pink-50 transition-colors">#{order.id}</td>
+                  <td className="py-5 font-bold text-gray-800 bg-gray-50 group-hover:bg-pink-50">{order.customerName}</td>
+                  <td className="py-5 text-gray-500 font-medium bg-gray-50 group-hover:bg-pink-50">{order.serviceType}</td>
+                  <td className="py-5 font-bold text-gray-800 bg-gray-50 group-hover:bg-pink-50">{order.weight} kg</td>
+                  <td className="py-5 bg-gray-50 group-hover:bg-pink-50 text-center">
+                    <span className={`px-4 py-1.5 rounded-xl text-[10px] font-black uppercase ${
+                      order.status === 'Completed' ? 'bg-emerald-100 text-emerald-600' : 
+                      order.status === 'Pending' ? 'bg-amber-100 text-amber-600' : 'bg-red-100 text-red-600'
                     }`}>
                       {order.status}
                     </span>
                   </td>
-                  <td className="py-5 font-black text-gray-800">
-                    ${order.totalPrice}
-                  </td>
-                  <td className="py-5 text-center rounded-r-2xl bg-gray-50/50 group-hover:bg-white transition-colors px-4">
+                  <td className="py-5 font-black text-gray-900 bg-gray-50 group-hover:bg-pink-50">${order.totalPrice}</td>
+                  <td className="py-5 pr-6 text-center bg-gray-50 rounded-r-2xl group-hover:bg-pink-50 transition-all relative">
                     <button 
-                      onClick={() => setSelectedOrder(order)}
-                      className="bg-white text-hijau border-2 border-hijau/20 hover:border-hijau hover:bg-hijau hover:text-white px-4 py-2 rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-2 mx-auto"
+                      onClick={(e) => { e.stopPropagation(); setSelectedOrder(order); }} 
+                      className="relative z-20 p-2.5 bg-white text-gray-400 rounded-xl hover:text-pink-500 shadow-sm transition-all active:scale-90"
                     >
-                      <FaEye /> Detail
+                      <FaEye size={16} />
                     </button>
                   </td>
                 </tr>
@@ -215,6 +108,48 @@ export default function Orders() {
           </table>
         </div>
       </div>
+
+      {/* MODAL: ADD ORDER */}
+      {showModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+          <div className="bg-white w-full max-w-md rounded-[2.5rem] p-10 shadow-2xl relative">
+            <button onClick={() => setShowModal(false)} className="absolute top-8 right-8 text-gray-300 hover:text-red-500 transition-colors"><FaTimes /></button>
+            <h2 className="text-2xl font-black text-gray-800 mb-2">New Order</h2>
+            <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-8">Uci Laundry System</p>
+            <form onSubmit={handleSave} className="space-y-4">
+              <input required type="text" placeholder="Customer Name" className="w-full bg-gray-50 border-none rounded-2xl p-4 focus:ring-2 focus:ring-pink-200 outline-none" onChange={(e) => setNewOrder({...newOrder, customerName: e.target.value})} />
+              <select className="w-full bg-gray-50 border-none rounded-2xl p-4 focus:ring-2 focus:ring-pink-200 outline-none" onChange={(e) => setNewOrder({...newOrder, serviceType: e.target.value})}>
+                <option>Wash & Fold</option><option>Dry Clean</option><option>Ironing Only</option>
+              </select>
+              <div className="grid grid-cols-2 gap-4">
+                <input required type="number" placeholder="Weight (kg)" className="w-full bg-gray-50 border-none rounded-2xl p-4 focus:ring-2 focus:ring-pink-200" onChange={(e) => setNewOrder({...newOrder, weight: e.target.value})} />
+                <input required type="date" className="w-full bg-gray-50 border-none rounded-2xl p-4 focus:ring-2 focus:ring-pink-200 text-gray-400" onChange={(e) => setNewOrder({...newOrder, pickupDate: e.target.value})} />
+              </div>
+              <input required type="number" placeholder="Total Price ($)" className="w-full bg-gray-50 border-none rounded-2xl p-4 focus:ring-2 focus:ring-pink-200 outline-none" onChange={(e) => setNewOrder({...newOrder, totalPrice: e.target.value})} />
+              <button type="submit" className="w-full bg-pink-500 text-white font-black py-4 rounded-2xl shadow-lg shadow-pink-100 mt-4 hover:bg-pink-600 transition-all">Save Transaction</button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL: DETAIL ORDER */}
+      {selectedOrder && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+          <div className="bg-white w-full max-w-sm rounded-[2.5rem] p-10 shadow-2xl relative text-center">
+            <div className="w-16 h-16 bg-pink-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-pink-100">
+                <FaShoppingCart size={24}/>
+            </div>
+            <h2 className="text-xl font-black text-gray-900 leading-none">Order #{selectedOrder.id}</h2>
+            <p className="text-gray-400 text-[10px] font-black uppercase tracking-widest mt-2 mb-8">Detailed Invoice</p>
+            <div className="space-y-4 text-left bg-gray-50 p-6 rounded-3xl border border-gray-100">
+                <div className="flex justify-between border-b pb-2"><span className="text-[10px] font-black text-gray-400 uppercase">Customer</span><span className="font-bold text-gray-800">{selectedOrder.customerName}</span></div>
+                <div className="flex justify-between border-b pb-2"><span className="text-[10px] font-black text-gray-400 uppercase">Service</span><span className="font-bold text-gray-800">{selectedOrder.serviceType}</span></div>
+                <div className="flex justify-between"><span className="text-[10px] font-black text-gray-400 uppercase">Total Amount</span><span className="font-black text-pink-500">${selectedOrder.totalPrice}</span></div>
+            </div>
+            <button onClick={() => setSelectedOrder(null)} className="w-full mt-8 bg-gray-900 text-white font-black py-4 rounded-2xl hover:bg-gray-800 transition-all">Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
