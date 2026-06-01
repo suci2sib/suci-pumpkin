@@ -13,6 +13,7 @@ const Orders = React.lazy(() => import("./pages/Orders"));
 const Customers = React.lazy(() => import("./pages/Customers"));
 const Products = React.lazy(() => import("./pages/Products"));
 const ProductDetail = React.lazy(() => import("./pages/ProductDetail"));
+const FiturCRM = React.lazy(() => import("./pages/FiturCRM")); // 1. TAMBAHAN: Lazy load untuk Fitur CRM
 
 /**
  * Lazy Load Komponen Error
@@ -46,6 +47,9 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetail />} />
 
+          {/* 2. TAMBAHAN: Rute Jalan Tol Resmi untuk Halaman Fitur CRM */}
+          <Route path="/fitur-crm" element={<FiturCRM />} />
+
           {/* Rute Testing untuk Error Pages (Sesuai Sidebar) */}
           <Route 
             path="/400" 
@@ -69,7 +73,6 @@ function App() {
         </Route>
 
         {/* --- HANDLING PAGE NOT FOUND (404) --- */}
-        {/* Mengarahkan rute yang tidak dikenal ke halaman Error 404 */}
         <Route 
           path="*" 
           element={<ErrorPage code="404" title="Not Found" description="Ups! Halaman yang Anda cari tidak ada." />} 
