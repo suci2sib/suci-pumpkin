@@ -1,35 +1,98 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 // Import Komponen Inti Shadcn UI
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 // Import Ikon
-import { MdSearch, MdFilterList, MdCheckCircle, MdHourglassTop, MdCancel, MdLocalPhone } from "react-icons/md";
-import { FaGem, FaDollarSign, FaUserFriends, FaUserPlus, FaTimes } from "react-icons/fa";
+import { MdSearch, MdFilterList, MdCheckCircle, MdHourglassTop, MdCancel, MdLocalPhone, MdSave } from "react-icons/md";
+import { FaGem, FaDollarSign, FaUserFriends, FaUserPlus, FaTimes, FaSync } from "react-icons/fa";
 
 export default function FiturCRM() {
-  // 🛠️ Ubah data mentah jadi STATE agar bisa dimanipulasi/ditambah live
+  // ═══════════════════════════════════════════════════════════════
+  // 1️⃣ useState - STATE MANAGEMENT
+  // ═══════════════════════════════════════════════════════════════
   const [crmData, setCrmData] = useState([
     { id: "TRX-2026-01", name: "Della Oktaviani", phone: "0812-3456-7890", service: "Cuci Komplit + Premium Wangi", weight: "5.5 Kg", date: "01 Jun 2026", status: "Proses", total: "Rp 55.000" },
-    { id: "TRX-2026-02", name: "Fikri Muhaffizh", phone: "0823-8888-1122", service: "Setrika Express 3 Jam", weight: "3.0 Kg", date: "01 Jun 2026", status: "Selesai", total: "Rp 30.000" },
+    { id: "TRX-2026-02", name: "Abdul Rahman", phone: "0823-8888-1122", service: "Setrika Express 3 Jam", weight: "3.0 Kg", date: "01 Jun 2026", status: "Selesai", total: "Rp 30.000" },
     { id: "TRX-2026-03", name: "Suci Ramadani", phone: "0895-7722-4455", service: "Cuci Selimut & Bedcover XL", weight: "8.0 Kg", date: "31 Mei 2026", status: "Selesai", total: "Rp 120.000" },
-    { id: "TRX-2026-04", name: "Ahmad Dhani", phone: "0813-9900-1122", service: "Cuci Kiloan Biasa", weight: "4.0 Kg", date: "30 Mei 2026", status: "Batal", total: "Rp 24.000" },
+    { id: "TRX-2026-04", name: "Azzah zakiya", phone: "0813-9900-1122", service: "Cuci Kiloan Biasa", weight: "4.0 Kg", date: "30 Mei 2026", status: "Batal", total: "Rp 24.000" },
     { id: "TRX-2026-05", name: "Marion Figueroa", phone: "0852-1133-5577", service: "Dry Cleaning Jas & Kebaya", weight: "2 Pcs", date: "29 Mei 2026", status: "Proses", total: "Rp 95.000" },
   ]);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedStatusFilter, setSelectedStatusFilter] = useState("Semua");
-
-  // 🛠️ State kontrol buka/tutup Form Modal Tambah Data
   const [isModalOpen, setIsModalOpen] = useState(false);
   
-  // 🛠️ State untuk menampung field input form baru
+  // State form input
   const [newName, setNewName] = useState("");
   const [newPhone, setNewPhone] = useState("");
   const [newService, setNewService] = useState("");
   const [newWeight, setNewWeight] = useState("");
   const [newTotal, setNewTotal] = useState("");
+
+  // ═══════════════════════════════════════════════════════════════
+  // 2️⃣ useEffect - SIDE EFFECTS
+  // ═══════════════════════════════════════════════════════════════
+  
+  // 🎯 EFFECT 1: Auto-save ke localStorage setiap crmData berubah
+  useEffect(() => {
+    localStorage.setItem("uci_crm_data", JSON.stringify(crmData));
+    console.log("💾 Data tersimpan ke localStorage:", crmData.length, "transaksi");
+  }, [crmData]); // Dependency: [crmData] → jalan setiap crmData berubah
+
+  // 🎯 EFFECT 2: Load data dari localStorage saat pertama kali mount
+  useEffect(() => {
+    const savedData = localStorage.getItem("uci_crm_data");
+    if (savedData) {
+      try {
+        const parsed = JSON.parse(savedData);
+        setCrmData(parsed);
+        console.log("📂 Data dimuat dari localStorage:", parsed.length, "transaksi");
+      } catch (e) {
+        console.error("Gagal parse localStorage:", e);
+      }
+    }
+  }, []); // Dependency: [] → jalan SEKALI saat mount (componentDidMount)
+
+  // 🎯 EFFECT 3: Notifikasi toast saat data berubah
+  const [toastMessage, setToastMessage] = useState(null);
+  useEffect(() => {
+    if (toastMessage) {
+      const timer = setTimeout(() => setToastMessage(null), 3000);
+      return () => clearTimeout(timer); // Cleanup function
+    }
+  }, [toastMessage]); // Dependency: [toastMessage]
+
+  // ═══════════════════════════════════════════════════════════════
+  // 3️⃣ useRef - DOM REFERENCES & PERSISTENT VALUES
+  // 🎯 REF 1: Referensi ke input search untuk auto-focus
+  const searchInputRef = useRef(null);
+  
+  // 🎯 REF 2: Referensi ke container tabel untuk auto-scroll
+  const tableContainerRef = useRef(null);
+  
+  // 🎯 REF 3: Counter render (tidak trigger re-render)
+  const renderCountRef = useRef(0);
+  renderCountRef.current += 1;
+
+  // 🎯 REF 4: Simpan previous data length untuk deteksi perubahan
+  const prevDataLengthRef = useRef(crmData.length);
+
+  // Auto-focus search input saat komponen mount
+  useEffect(() => {
+    searchInputRef.current?.focus();
+  }, []);
+
+  // Effect untuk auto-scroll ke tabel saat data baru ditambah
+  useEffect(() => {
+    if (crmData.length > prevDataLengthRef.current) {
+      // Data baru ditambah → scroll ke tabel
+      setTimeout(() => {
+        tableContainerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+    prevDataLengthRef.current = crmData.length;
+  }, [crmData.length]);
 
   // Logika filter gabungan
   const filteredData = crmData.filter(item => {
@@ -38,7 +101,7 @@ export default function FiturCRM() {
     return matchesSearch && matchesStatus;
   });
 
-  // 🛠️ Fungsi Eksekusi Tambah Data Baru ke Tabel
+  // Fungsi Tambah Data
   const handleAddData = (e) => {
     e.preventDefault();
     if (!newName || !newPhone) return alert("Nama dan Nomor HP wajib diisi!");
@@ -50,12 +113,13 @@ export default function FiturCRM() {
       phone: newPhone,
       service: newService || "Cuci Kiloan Standar",
       weight: newWeight ? `${newWeight} Kg` : "1.0 Kg",
-      date: "01 Jun 2026", // Otomatis hari ini
-      status: "Proses",    // Default order baru pasti proses
+      date: new Date().toLocaleDateString("id-ID", { day: "2-digit", month: "short", year: "numeric" }),
+      status: "Proses",
       total: newTotal ? `Rp ${parseInt(newTotal).toLocaleString("id-ID")}` : "Rp 0"
     };
 
-    setCrmData([newData, ...crmData]); // Taruh data baru paling atas
+    setCrmData([newData, ...crmData]);
+    setToastMessage(`✅ Order ${newName} berhasil ditambahkan!`);
     
     // Reset Form & Tutup Modal
     setNewName("");
@@ -66,14 +130,34 @@ export default function FiturCRM() {
     setIsModalOpen(false);
   };
 
+  // Fungsi reset data
+  const handleResetData = () => {
+    if (confirm("Yakin ingin reset semua data?")) {
+      localStorage.removeItem("uci_crm_data");
+      setCrmData([
+        { id: "TRX-2026-01", name: "Della Oktaviani", phone: "0812-3456-7890", service: "Cuci Komplit + Premium Wangi", weight: "5.5 Kg", date: "01 Jun 2026", status: "Proses", total: "Rp 55.000" },
+        { id: "TRX-2026-02", name: "Abdul Rahman", phone: "0823-8888-1122", service: "Setrika Express 3 Jam", weight: "3.0 Kg", date: "01 Jun 2026", status: "Selesai", total: "Rp 30.000" },
+      ]);
+      setToastMessage("🔄 Data direset ke default!");
+    }
+  };
+
   const stats = [
     { label: "Total Members", value: crmData.length * 200 + 250 + "", icon: <FaUserFriends />, color: "bg-pink-500" },
     { label: "Churn Rate", value: "0.8%", icon: <FaGem />, color: "bg-emerald-400" },
     { label: "Avg Spend", value: "$42", icon: <FaDollarSign />, color: "bg-pink-500" },
+    { label: "Render Count", value: renderCountRef.current, icon: <FaSync />, color: "bg-blue-400" },
   ];
 
   return (
     <div className="bg-[#F8F9FB] min-h-screen p-6 relative">
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className="fixed top-6 right-6 z-[200] bg-emerald-500 text-white px-6 py-3 rounded-2xl shadow-xl font-bold text-sm animate-bounce flex items-center gap-2">
+          <MdSave /> {toastMessage}
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto">
         
         {/* HEADER SECTION */}
@@ -81,19 +165,27 @@ export default function FiturCRM() {
           <div>
             <h1 className="text-3xl font-black text-gray-900 mb-1">Customer Relationship Management</h1>
             <p className="text-gray-400 text-sm font-medium">Data interaksi pelanggan dan pelacakan status cucian Uci Laundry</p>
+            <p className="text-[10px] text-gray-300 mt-1">Render ke-{renderCountRef.current} | useRef tidak trigger re-render</p>
           </div>
           
-          {/* 🛠️ TOMBOL TAMBAH DATA (SAMA PERSIS DESIGN BUTTON DENGAN NEW MEMBER CUSTOMERS) */}
-          <button 
-            onClick={() => setIsModalOpen(true)}
-            className="flex items-center gap-2 px-6 py-3 bg-pink-500 text-white rounded-2xl shadow-lg font-bold hover:bg-pink-600 transition-all active:scale-95 cursor-pointer"
-          >
-            <FaUserPlus /> Tambah Data
-          </button>
+          <div className="flex gap-3">
+            <button 
+              onClick={handleResetData}
+              className="flex items-center gap-2 px-4 py-3 bg-gray-200 text-gray-600 rounded-2xl shadow font-bold hover:bg-gray-300 transition-all active:scale-95 cursor-pointer text-xs"
+            >
+              <FaSync /> Reset
+            </button>
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className="flex items-center gap-2 px-6 py-3 bg-pink-500 text-white rounded-2xl shadow-lg font-bold hover:bg-pink-600 transition-all active:scale-95 cursor-pointer"
+            >
+              <FaUserPlus /> Tambah Data
+            </button>
+          </div>
         </div>
 
         {/* STATS CARD CONTAINER */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
           {stats.map((item, i) => (
             <div key={i} className="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-50 flex items-center gap-4">
               <div className={`${item.color} w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-md`}>
@@ -108,19 +200,23 @@ export default function FiturCRM() {
         </div>
 
         {/* WORKSPACE AREA */}
-        <div className="bg-white rounded-[2.5rem] p-8 shadow-sm border border-gray-50">
+        <div className="bg-white rounded-[2.5rem] p-8 shadow-sm border border-gray-50" ref={tableContainerRef}>
           
           {/* SEARCH & FILTER ACTION BAR */}
           <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 mb-6">
             <div className="relative flex-1 max-w-md">
               <MdSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
               <input 
+                ref={searchInputRef}  // ← useRef untuk auto-focus
                 type="text" 
                 placeholder="Cari nama pelanggan..." 
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-11 pr-4 py-2.5 bg-gray-50 border border-gray-100 rounded-xl text-xs font-medium focus:outline-none focus:border-pink-300 focus:bg-white transition-all"
               />
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-gray-300 font-medium">
+                Auto-focus ✨
+              </span>
             </div>
 
             {/* CONTAINER TOMBOL FILTER */}
@@ -131,10 +227,9 @@ export default function FiturCRM() {
                   isFilterOpen ? "bg-pink-500 border-pink-500 text-white shadow-md" : "bg-gray-50 border-gray-100 text-gray-600 hover:bg-gray-100"
                 }`}
               >
-                <MdFilterList size={16} /> Filter Lanjutan: {selectedStatusFilter}
+                <MdFilterList size={16} /> Filter: {selectedStatusFilter}
               </button>
 
-              {/* DROPDOWN MENU FILTER */}
               {isFilterOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-100 rounded-2xl shadow-xl p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                   <p className="text-[10px] font-black uppercase text-gray-400 px-3 py-1.5 tracking-wider">Filter Status</p>
@@ -236,16 +331,21 @@ export default function FiturCRM() {
             </Table>
           </div>
 
+          {/* Info localStorage */}
+          <div className="mt-4 flex items-center gap-2 text-[10px] text-gray-400 font-medium">
+            <MdSave className="text-emerald-400" /> 
+            Data otomatis tersimpan di localStorage (useEffect) • {crmData.length} transaksi terekam
+          </div>
+
         </div>
 
       </div>
 
-      {/* 🛠️ MODAL DIALOG POPUP FORM TAMBAH DATA (MATCH DESIGN THEME) */}
+      {/* MODAL DIALOG POPUP FORM TAMBAH DATA */}
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
           <div className="bg-white w-full max-w-md rounded-[2.5rem] p-8 relative shadow-2xl border border-gray-100 animate-in fade-in zoom-in-95 duration-200">
             
-            {/* Tombol Close */}
             <button 
               onClick={() => setIsModalOpen(false)} 
               className="absolute top-6 right-6 text-gray-300 hover:text-red-500 transition-colors cursor-pointer"

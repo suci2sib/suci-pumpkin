@@ -13,7 +13,7 @@ const Orders = React.lazy(() => import("./pages/Orders"));
 const Customers = React.lazy(() => import("./pages/Customers"));
 const Products = React.lazy(() => import("./pages/Products"));
 const ProductDetail = React.lazy(() => import("./pages/ProductDetail"));
-const FiturCRM = React.lazy(() => import("./pages/FiturCRM")); // 1. TAMBAHAN: Lazy load untuk Fitur CRM
+const FiturCRM = React.lazy(() => import("./pages/FiturCRM")); 
 
 /**
  * Lazy Load Komponen Error
