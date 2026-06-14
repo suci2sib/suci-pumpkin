@@ -28,7 +28,6 @@ export default function Dashboard() {
           <SubHeading text="Welcome back to Uci Laundry dashboard" />
         </div>
         <div className="flex gap-3">
-          <ButtonSecondary text="Export Report" />
           <ButtonPrimary text="New Order" />
         </div>
       </div>
