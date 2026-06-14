@@ -3,10 +3,6 @@ import "./assets/tailwind.css";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Loading from "./components/Loading";
 
-/**
- * Lazy Load Komponen Utama (Dashboard & Menu)
- * Menggunakan React.lazy untuk performa yang lebih ringan
- */
 const MainLayout = React.lazy(() => import("./layouts/MainLayout"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const Orders = React.lazy(() => import("./pages/Orders"));
@@ -15,14 +11,9 @@ const Products = React.lazy(() => import("./pages/Products"));
 const ProductDetail = React.lazy(() => import("./pages/ProductDetail"));
 const FiturCRM = React.lazy(() => import("./pages/FiturCRM")); 
 
-/**
- * Lazy Load Komponen Error
- */
+const GuestLaundry = React.lazy(() => import("./pages/GuestLaundry"));
 const ErrorPage = React.lazy(() => import("./pages/ErrorPage"));
 
-/**
- * Lazy Load Komponen Auth
- */
 const AuthLayout = React.lazy(() => import("./layouts/AuthLayout"));
 const Login = React.lazy(() => import("./pages/auth/Login"));
 const Register = React.lazy(() => import("./pages/auth/Register"));
@@ -30,14 +21,17 @@ const Forgot = React.lazy(() => import("./pages/auth/Forgot"));
 
 function App() {
   return (
-    // Suspense menampilkan Loading spinner saat komponen sedang diunduh
     <Suspense fallback={<Loading />}>
       <Routes>
+
+        {/* RUTE UTAMA (LANDING PAGE): Langsung memuat halaman Guest Laundry */}
+        <Route path="/" element={<GuestLaundry />} />
         
-        {/* --- GROUP UTAMA (Memakai Sidebar & Navbar) --- */}
+        {/* --- GROUP UTAMA (Memakai Sidebar & Navbar Admin) --- */}
         <Route element={<MainLayout />}>
-          {/* Halaman Beranda / Dashboard */}
-          <Route path="/" element={<Dashboard />} />
+          
+          {/* RUTE ADMIN: Halaman dashboard utama dipindah ke "/admin" */}
+          <Route path="/admin" element={<Dashboard />} />
           
           {/* Menu Navigasi Utama */}
           <Route path="/orders" element={<Orders />} />
@@ -47,10 +41,10 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetail />} />
 
-          {/* 2. TAMBAHAN: Rute Jalan Tol Resmi untuk Halaman Fitur CRM */}
+          {/* Rute Halaman Fitur CRM */}
           <Route path="/fitur-crm" element={<FiturCRM />} />
 
-          {/* Rute Testing untuk Error Pages (Sesuai Sidebar) */}
+          {/* Rute Testing untuk Error Pages */}
           <Route 
             path="/400" 
             element={<ErrorPage code="400" title="Bad Request" description="Permintaan tidak dapat diproses." />} 
