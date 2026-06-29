@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom"; // 🟢 WAJIB ADA untuk pindah halaman
 import {
   MdLocalLaundryService,
   MdSearch,
@@ -192,6 +193,11 @@ export default function GuestLaundry() {
             <a href="#cek-status" className="text-sm font-semibold text-gray-500 hover:text-pink-500 transition-colors">Tracking</a>
           </div>
           <div className="flex items-center gap-2">
+            {/* 🟢 TOMBOL BARU: LOGIN MEMBER AREA */}
+            <Link to="/login-member" className="hidden sm:flex px-4 py-2 bg-pink-50 text-pink-600 text-xs font-black rounded-xl border border-pink-100 hover:bg-pink-500 hover:text-white transition-all">
+               Login Member
+            </Link>
+            
             <a href={waLink} target="_blank" rel="noreferrer" className="hidden sm:flex items-center gap-2 px-5 py-2.5 bg-emerald-500 text-white text-xs font-bold rounded-xl shadow-lg shadow-emerald-100 hover:bg-emerald-600 transition-all active:scale-95">
               <FaWhatsapp size={16} /> Chat WhatsApp
             </a>
@@ -207,6 +213,8 @@ export default function GuestLaundry() {
               <a href="#promo" onClick={function() { setMenuOpen(false); }} className="px-4 py-3 text-sm font-semibold text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-xl">Promo</a>
               <a href="#faq" onClick={function() { setMenuOpen(false); }} className="px-4 py-3 text-sm font-semibold text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-xl">FAQ</a>
               <a href="#cek-status" onClick={function() { setMenuOpen(false); }} className="px-4 py-3 text-sm font-semibold text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-xl">Tracking</a>
+              {/* 🟢 TOMBOL BARU MOBILE: LOGIN MEMBER */}
+              <Link to="/login-member" onClick={function() { setMenuOpen(false); }} className="px-4 py-3 text-sm font-bold text-pink-600 border border-pink-100 rounded-xl mt-2 text-center">Login Member Area</Link>
               <a href={waLink} target="_blank" rel="noreferrer" className="px-4 py-3 bg-emerald-500 text-white text-sm font-bold rounded-xl text-center flex items-center justify-center gap-2 mt-2">
                 <FaWhatsapp size={18} /> Chat WhatsApp
               </a>
@@ -234,9 +242,10 @@ export default function GuestLaundry() {
               Cuci, setrika, dry clean — mesin terpisah per pelanggan. Higienis, wangi, dan tepat waktu.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <a href={waLink} target="_blank" rel="noreferrer" className="group px-6 py-3.5 bg-pink-500 text-white text-sm font-bold rounded-2xl shadow-lg shadow-pink-200 hover:bg-pink-600 transition-all active:scale-95 flex items-center gap-2">
-                <FaWhatsapp size={18} /> Order Sekarang <MdArrowForward size={16} className="group-hover:translate-x-1 transition-transform" />
-              </a>
+              {/* 🟢 TOMBOL YANG DIUBAH: KE DAFTAR MEMBER (CRM FLOW) */}
+              <Link to="/register-member" className="group px-6 py-3.5 bg-pink-500 text-white text-sm font-bold rounded-2xl shadow-lg shadow-pink-200 hover:bg-pink-600 transition-all active:scale-95 flex items-center gap-2">
+                <MdLocalLaundryService size={18} /> Pesan Sekarang <MdArrowForward size={16} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
               <a href="#cek-status" className="px-6 py-3.5 bg-gray-50 text-gray-700 text-sm font-bold rounded-2xl border border-gray-200 hover:border-pink-300 hover:text-pink-500 transition-all flex items-center gap-2">
                 <MdSearch size={18} /> Cek Status Cucian
               </a>
@@ -317,7 +326,7 @@ export default function GuestLaundry() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
             {currentServices.map(function(s, i) {
               return (
-                <div key={i} className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group relative">
+                <div key={i} className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group relative flex flex-col h-full">
                   {s.popular && <div className="absolute top-3 right-3 z-10 bg-white text-pink-500 text-[9px] font-black px-3 py-1 rounded-full shadow-md border border-pink-100">⭐ FAVORIT</div>}
                   <SmartImg
                     src={s.img}
@@ -327,20 +336,21 @@ export default function GuestLaundry() {
                     className="h-44"
                     imgClass="group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="p-5">
+                  <div className="p-5 flex flex-col flex-1">
                     <div className="flex items-center gap-2 mb-1">
                       <span className="text-lg">{s.emoji}</span>
                       <h3 className="font-black text-gray-900 text-sm">{s.name}</h3>
                     </div>
                     <p className="text-xs text-gray-400 font-medium mb-3">{s.desc}</p>
-                    <div className="flex items-end gap-1 mb-4">
+                    <div className="flex items-end gap-1 mb-4 mt-auto">
                       <span className="text-sm font-medium text-gray-400">Rp</span>
                       <span className="text-2xl font-black text-gray-900">{s.price}</span>
                       <span className="text-xs font-semibold text-gray-400 mb-0.5">{s.unit}</span>
                     </div>
-                    <a href={"https://wa.me/6289577224455?text=Halo%20UciLaundry%2C%20saya%20ingin%20order%20" + encodeURIComponent(s.name)} target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 py-3 bg-pink-50 text-pink-600 text-xs font-bold rounded-xl hover:bg-pink-500 hover:text-white transition-all">
-                      <FaWhatsapp size={14} /> Order via WhatsApp
-                    </a>
+                    {/* 🟢 TOMBOL YANG DIUBAH: KE DAFTAR MEMBER PER PAKET */}
+                    <Link to="/register-member" className="w-full flex items-center justify-center gap-2 py-3 bg-pink-50 text-pink-600 text-xs font-bold rounded-xl hover:bg-pink-500 hover:text-white transition-all">
+                      Ambil Paket Member
+                    </Link>
                   </div>
                 </div>
               );
@@ -364,15 +374,15 @@ export default function GuestLaundry() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex items-start gap-4">
               <div className="w-11 h-11 bg-emerald-500 rounded-xl flex items-center justify-center text-white shadow-lg shrink-0"><FaWhatsapp size={20} /></div>
-              <div><p className="text-[10px] font-black text-gray-300 uppercase tracking-widest">Step 1</p><h3 className="font-black text-gray-900 text-sm mt-0.5">Chat WhatsApp</h3><p className="text-xs text-gray-400 font-medium mt-0.5">Sebutkan layanan dan alamat jemput</p></div>
+              <div><p className="text-[10px] font-black text-gray-300 uppercase tracking-widest">Step 1</p><h3 className="font-black text-gray-900 text-sm mt-0.5">Daftar Akun</h3><p className="text-xs text-gray-400 font-medium mt-0.5">Gabung member premium UciLaundry</p></div>
             </div>
             <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex items-start gap-4">
               <div className="w-11 h-11 bg-pink-500 rounded-xl flex items-center justify-center text-white shadow-lg shrink-0"><MdLocalShipping size={20} /></div>
-              <div><p className="text-[10px] font-black text-gray-300 uppercase tracking-widest">Step 2</p><h3 className="font-black text-gray-900 text-sm mt-0.5">Jemput dan Cuci</h3><p className="text-xs text-gray-400 font-medium mt-0.5">Kami jemput, cuci mesin terpisah</p></div>
+              <div><p className="text-[10px] font-black text-gray-300 uppercase tracking-widest">Step 2</p><h3 className="font-black text-gray-900 text-sm mt-0.5">Pesan & Jemput</h3><p className="text-xs text-gray-400 font-medium mt-0.5">Kami jemput, cuci mesin terpisah</p></div>
             </div>
             <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex items-start gap-4">
               <div className="w-11 h-11 bg-amber-500 rounded-xl flex items-center justify-center text-white shadow-lg shrink-0"><MdCheckCircle size={20} /></div>
-              <div><p className="text-[10px] font-black text-gray-300 uppercase tracking-widest">Step 3</p><h3 className="font-black text-gray-900 text-sm mt-0.5">Antar Bersih</h3><p className="text-xs text-gray-400 font-medium mt-0.5">Diantar ke rumah, bayar di tempat</p></div>
+              <div><p className="text-[10px] font-black text-gray-300 uppercase tracking-widest">Step 3</p><h3 className="font-black text-gray-900 text-sm mt-0.5">Antar & Reward</h3><p className="text-xs text-gray-400 font-medium mt-0.5">Diantar ke rumah + Poin loyalitas</p></div>
             </div>
           </div>
         </div>
@@ -397,42 +407,17 @@ export default function GuestLaundry() {
                 </div>
               </div>
             </div>
-            <div onClick={function() { copyVoucher("HEMAT20"); }} className="cursor-pointer bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-5 border border-pink-100 hover:shadow-xl transition-all group flex items-center gap-4">
-              <div className="w-16 h-16 bg-emerald-500 rounded-2xl flex items-center justify-center shrink-0 shadow-lg group-hover:scale-110 transition-transform"><span className="text-white text-base font-black">20% OFF</span></div>
-              <div className="flex-1 min-w-0">
-                <span className="bg-emerald-500 text-white text-[9px] font-black px-2.5 py-0.5 rounded-full">WEEKEND</span>
-                <p className="text-xs text-gray-500 font-medium mt-1.5 mb-2">Sabtu-Minggu. Min. 5Kg. Maks. Rp25.000</p>
-                <div className="flex items-center gap-2">
-                  <div className="bg-white border-2 border-dashed border-pink-300 rounded-lg px-3 py-1"><span className="text-sm font-black text-pink-600 tracking-wider">HEMAT20</span></div>
-                  <span className="text-[10px] font-bold text-pink-400 flex items-center gap-1"><MdFileCopy size={11} /> Salin</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="max-w-2xl mx-auto">
-            <div className="bg-gradient-to-r from-pink-500 to-rose-500 rounded-3xl p-7 text-center text-white shadow-2xl shadow-pink-200 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-              <div className="relative z-10">
-                <h3 className="text-base font-black mb-3">⏰ Flash Sale Berakhir Dalam</h3>
-                <div className="flex justify-center gap-2 mb-4">
-                  <div className="bg-white/20 backdrop-blur rounded-xl px-4 py-2.5 min-w-[56px]">
-                    <span className="text-xl font-black">{String(countdown.h).padStart(2, "0")}</span>
-                    <p className="text-[8px] font-bold opacity-70 uppercase">Jam</p>
+            <div className="bg-gradient-to-r from-pink-500 to-rose-500 rounded-3xl p-6 text-center text-white relative overflow-hidden shadow-xl">
+               <div className="relative z-10">
+                  <p className="text-xs font-black uppercase tracking-widest opacity-80">Flash Sale Member Berakhir</p>
+                  <div className="flex justify-center gap-3 my-3">
+                     <div className="bg-white/20 p-2 rounded-lg min-w-[50px]"><span className="block text-xl font-black">{String(countdown.h).padStart(2, '0')}</span><span className="text-[8px] uppercase">Jam</span></div>
+                     <div className="bg-white/20 p-2 rounded-lg min-w-[50px]"><span className="block text-xl font-black">{String(countdown.m).padStart(2, '0')}</span><span className="text-[8px] uppercase">Menit</span></div>
+                     <div className="bg-white/20 p-2 rounded-lg min-w-[50px]"><span className="block text-xl font-black">{String(countdown.s).padStart(2, '0')}</span><span className="text-[8px] uppercase">Detik</span></div>
                   </div>
-                  <div className="bg-white/20 backdrop-blur rounded-xl px-4 py-2.5 min-w-[56px]">
-                    <span className="text-xl font-black">{String(countdown.m).padStart(2, "0")}</span>
-                    <p className="text-[8px] font-bold opacity-70 uppercase">Menit</p>
-                  </div>
-                  <div className="bg-white/20 backdrop-blur rounded-xl px-4 py-2.5 min-w-[56px]">
-                    <span className="text-xl font-black">{String(countdown.s).padStart(2, "0")}</span>
-                    <p className="text-[8px] font-bold opacity-70 uppercase">Detik</p>
-                  </div>
-                </div>
-                <p className="text-xs font-semibold opacity-80 mb-4">Diskon 40% Premium! Kode: <span className="font-black bg-white/20 px-2 py-0.5 rounded-lg">FLASH40</span></p>
-                <a href="https://wa.me/6289577224455?text=Halo%20UciLaundry%2C%20saya%20ingin%20pakai%20kode%20FLASH40" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-white text-pink-600 text-sm font-bold px-7 py-2.5 rounded-xl hover:bg-pink-50 transition-all shadow-lg active:scale-95">
-                  <FaWhatsapp size={16} /> Klaim Sekarang
-                </a>
-              </div>
+                  {/* 🟢 TOMBOL BARU: KLAIM DI PROMO */}
+                  <Link to="/register-member" className="inline-block px-6 py-2 bg-white text-pink-600 text-xs font-black rounded-full hover:bg-gray-50">Daftar Member Sekarang</Link>
+               </div>
             </div>
           </div>
         </div>
@@ -530,84 +515,16 @@ export default function GuestLaundry() {
                       <div><p className="text-[10px] font-bold text-gray-400 uppercase">Total</p><p className="text-sm font-black text-pink-500 mt-0.5">{trackingResult.total}</p></div>
                       <div><p className="text-[10px] font-bold text-gray-400 uppercase">Estimasi</p><p className="text-sm font-bold text-gray-700 mt-0.5">{trackingResult.estimasi}</p></div>
                     </div>
-                    {trackingResult.status === "Selesai" && (
-                      <div className="px-4 pb-4">
-                        <a href={"https://wa.me/6289577224455?text=Halo%2C%20cucian%20saya%20selesai%2C%20bisa%20diantar%3F%20Nama%3A%20" + encodeURIComponent(trackingResult.name)} target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 py-3 bg-emerald-500 text-white text-xs font-bold rounded-xl hover:bg-emerald-600 transition-all">
-                          <FaWhatsapp size={16} /> Minta Antar via WhatsApp
-                        </a>
-                      </div>
-                    )}
                   </div>
                 ) : (
                   <div className="text-center py-6">
                     <div className="w-14 h-14 bg-rose-50 rounded-xl flex items-center justify-center mx-auto mb-3"><MdSearch size={24} className="text-rose-400" /></div>
                     <p className="text-sm font-bold text-gray-800 mb-1">Nomor HP Tidak Ditemukan</p>
                     <p className="text-xs text-gray-400 mb-3">Pastikan nomor sesuai nota pendaftaran.</p>
-                    <a href="https://wa.me/6289577224455?text=Halo%2C%20saya%20tidak%20bisa%20temukan%20data%20cucian" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-500 text-white text-xs font-bold rounded-xl hover:bg-emerald-600 transition-all">
-                      <FaWhatsapp size={14} /> Tanya via WhatsApp
-                    </a>
                   </div>
                 )}
               </div>
             )}
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONI */}
-      <section className="py-16 bg-gray-50 border-y border-gray-100">
-        <div className="max-w-7xl mx-auto px-5">
-          <div className="text-center mb-10">
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-pink-500 bg-pink-50 px-4 py-1.5 rounded-full">💬 Testimoni</span>
-            <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-3">Kata Pelanggan Kami</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
-            <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:shadow-lg transition-all">
-              <div className="flex gap-0.5 mb-2.5"><MdStar size={14} className="text-amber-400" /><MdStar size={14} className="text-amber-400" /><MdStar size={14} className="text-amber-400" /><MdStar size={14} className="text-amber-400" /><MdStar size={14} className="text-amber-400" /></div>
-              <p className="text-xs text-gray-500 font-medium leading-relaxed mb-4">"Wangi premiumnya tahan lama! Selimut king size bersih sempurna."</p>
-              <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 bg-pink-100 rounded-full flex items-center justify-center"><span className="text-xs font-black text-pink-500">DR</span></div>
-                <div><p className="text-xs font-bold text-gray-800">Della Oktaviani</p><p className="text-[10px] text-gray-400 font-medium">Member Gold</p></div>
-              </div>
-            </div>
-            <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:shadow-lg transition-all">
-              <div className="flex gap-0.5 mb-2.5"><MdStar size={14} className="text-amber-400" /><MdStar size={14} className="text-amber-400" /><MdStar size={14} className="text-amber-400" /><MdStar size={14} className="text-amber-400" /><MdStar size={14} className="text-amber-400" /></div>
-              <p className="text-xs text-gray-500 font-medium leading-relaxed mb-4">"Express 3 jam beneran 3 jam! Baju siap pakai rapi. Recommended!"</p>
-              <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 bg-amber-100 rounded-full flex items-center justify-center"><span className="text-xs font-black text-amber-500">SR</span></div>
-                <div><p className="text-xs font-bold text-gray-800">Suci Ramadani</p><p className="text-[10px] text-gray-400 font-medium">Member Bronze</p></div>
-              </div>
-            </div>
-            <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:shadow-lg transition-all">
-              <div className="flex gap-0.5 mb-2.5"><MdStar size={14} className="text-amber-400" /><MdStar size={14} className="text-amber-400" /><MdStar size={14} className="text-amber-400" /><MdStar size={14} className="text-amber-400" /><MdStar size={14} className="text-gray-200" /></div>
-              <p className="text-xs text-gray-500 font-medium leading-relaxed mb-4">"1 mesin 1 orang, hygiene banget. Nggak pernah nemu baju orang lain."</p>
-              <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 bg-emerald-100 rounded-full flex items-center justify-center"><span className="text-xs font-black text-emerald-500">AP</span></div>
-                <div><p className="text-xs font-bold text-gray-800">Ahmad Pratama</p><p className="text-[10px] text-gray-400 font-medium">Member Platinum</p></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-14">
-        <div className="max-w-4xl mx-auto px-5">
-          <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl p-8 md:p-12 text-center text-white relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-72 h-72 bg-pink-500/10 rounded-full blur-3xl"></div>
-            <div className="relative z-10">
-              <div className="w-14 h-14 bg-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg shadow-pink-500/30"><MdLocalLaundryService size={28} className="text-white" /></div>
-              <h2 className="text-2xl md:text-3xl font-black tracking-tight mb-3">Siap Bikin Pakaian Anda <span className="text-pink-400">Bersih dan Wangi?</span></h2>
-              <p className="text-gray-400 text-sm font-medium max-w-md mx-auto mb-7">Jangan biarkan cucian menumpuk. Hubungi kami sekarang!</p>
-              <div className="flex flex-wrap justify-center gap-3">
-                <a href={waLink} target="_blank" rel="noreferrer" className="group px-7 py-3.5 bg-emerald-500 text-white text-sm font-bold rounded-2xl shadow-xl shadow-emerald-500/20 hover:bg-emerald-600 transition-all active:scale-95 flex items-center gap-2">
-                  <FaWhatsapp size={18} /> Order via WhatsApp <MdArrowForward size={16} className="group-hover:translate-x-1 transition-transform" />
-                </a>
-                <a href="tel:+6289577224455" className="px-7 py-3.5 bg-white/10 text-white text-sm font-bold rounded-2xl border border-white/20 hover:bg-white/20 transition-all flex items-center gap-2">
-                  <MdPhone size={16} /> Hubungi Kami
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -622,38 +539,25 @@ export default function GuestLaundry() {
                 <span className="font-black text-lg text-white">Uci<span className="text-pink-500">Laundry</span></span>
               </div>
               <p className="text-xs text-gray-500 font-medium leading-relaxed mb-3">Premium laundry service di Pekanbaru. Bersih, wangi, terpercaya.</p>
-              <div className="flex gap-2">
-                <a href="#" className="w-8 h-8 bg-gray-800 hover:bg-pink-500 rounded-lg flex items-center justify-center transition-all text-gray-400 hover:text-white"><FaInstagram size={14} /></a>
-                <a href="#" className="w-8 h-8 bg-gray-800 hover:bg-pink-500 rounded-lg flex items-center justify-center transition-all text-gray-400 hover:text-white"><FaFacebookF size={14} /></a>
-                <a href={waLink} target="_blank" rel="noreferrer" className="w-8 h-8 bg-gray-800 hover:bg-emerald-500 rounded-lg flex items-center justify-center transition-all text-gray-400 hover:text-white"><FaWhatsapp size={14} /></a>
-              </div>
             </div>
             <div>
               <h4 className="text-xs font-bold text-white mb-3">Layanan</h4>
               <ul className="space-y-2">
                 <li><a href="#layanan" className="text-xs font-medium text-gray-500 hover:text-pink-400 transition-colors">Cuci Komplit</a></li>
                 <li><a href="#layanan" className="text-xs font-medium text-gray-500 hover:text-pink-400 transition-colors">Cuci + Setrika</a></li>
-                <li><a href="#layanan" className="text-xs font-medium text-gray-500 hover:text-pink-400 transition-colors">Setrika Saja</a></li>
-                <li><a href="#layanan" className="text-xs font-medium text-gray-500 hover:text-pink-400 transition-colors">Cuci Selimut</a></li>
-                <li><a href="#layanan" className="text-xs font-medium text-gray-500 hover:text-pink-400 transition-colors">Cuci Sepatu</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-xs font-bold text-white mb-3">Informasi</h4>
-              <ul className="space-y-2">
-                <li><a href="#promo" className="text-xs font-medium text-gray-500 hover:text-pink-400 transition-colors">Promo</a></li>
-                <li><a href="#faq" className="text-xs font-medium text-gray-500 hover:text-pink-400 transition-colors">FAQ</a></li>
-                <li><a href="#cek-status" className="text-xs font-medium text-gray-500 hover:text-pink-400 transition-colors">Tracking</a></li>
-                <li><a href="#" className="text-xs font-medium text-gray-500 hover:text-pink-400 transition-colors">Kebijakan Privasi</a></li>
-              </ul>
+               <h4 className="text-xs font-bold text-white mb-3">CRM & Member</h4>
+               <ul className="space-y-2">
+                  <li><Link to="/login-member" className="text-xs font-medium text-gray-500 hover:text-pink-400 transition-colors">Portal Login Member</Link></li>
+                  <li><Link to="/register-member" className="text-xs font-medium text-gray-500 hover:text-pink-400 transition-colors">Daftar Member Baru</Link></li>
+               </ul>
             </div>
             <div>
               <h4 className="text-xs font-bold text-white mb-3">Kontak</h4>
               <ul className="space-y-2.5">
                 <li className="flex items-start gap-2"><MdPlace size={13} className="text-pink-400 mt-0.5 shrink-0" /><span className="text-xs text-gray-500">Jl. Tuanku Tambusai No. 88, Pekanbaru</span></li>
-                <li className="flex items-center gap-2"><MdPhone size={13} className="text-pink-400 shrink-0" /><a href="tel:+6289577224455" className="text-xs text-gray-500 hover:text-pink-400">0895-7722-4455</a></li>
-                <li className="flex items-center gap-2"><FaWhatsapp size={13} className="text-emerald-400 shrink-0" /><a href={waLink} target="_blank" rel="noreferrer" className="text-xs text-gray-500 hover:text-emerald-400">Chat WhatsApp</a></li>
-                <li className="flex items-center gap-2"><MdSchedule size={13} className="text-pink-400 shrink-0" /><span className="text-xs text-gray-500">Setiap hari 08:00 — 21:00</span></li>
               </ul>
             </div>
           </div>

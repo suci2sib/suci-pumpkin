@@ -13,6 +13,8 @@ const headers = {
     "Prefer": "return=representation" 
 };
 
+
+
 export const authAPI = {
     // Fungsi Register: Mengirim data user baru ke tabel
     async registerUser(userData) {
