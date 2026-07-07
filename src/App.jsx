@@ -9,6 +9,7 @@ const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const Orders = React.lazy(() => import("./pages/Orders"));
 const Customers = React.lazy(() => import("./pages/Customers"));
 const Products = React.lazy(() => import("./pages/Products"));
+const Users = React.lazy(() => import("./pages/Users"));
 const ProductDetail = React.lazy(() => import("./pages/ProductDetail")); // 🌟 FIX: Kembali ke ProductDetail (Tanpa S)
 const FiturCRM = React.lazy(() => import("./pages/FiturCRM")); // 🌟 FIX: Kembali ke FiturCRM asli kamu
 
@@ -46,6 +47,7 @@ function App() {
           <Route path="/customers" element={<Customers />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/users" element={<Users />} />
           <Route path="/fitur-crm" element={<FiturCRM />} />
 
           {/* Rute Standar Error Pages Internal */}

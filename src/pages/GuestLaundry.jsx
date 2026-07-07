@@ -193,7 +193,12 @@ export default function GuestLaundry() {
             <a href="#cek-status" className="text-sm font-semibold text-gray-500 hover:text-pink-500 transition-colors">Tracking</a>
           </div>
           <div className="flex items-center gap-2">
-            {/* 🟢 TOMBOL BARU: LOGIN MEMBER AREA */}
+            {/* 🟢 TOMBOL LOGIN ADMIN */}
+            <Link to="/login" className="hidden sm:flex px-3 py-2 bg-gray-800 text-white text-xs font-bold rounded-xl hover:bg-gray-900 transition-all">
+              👑 Admin
+            </Link>
+            
+            {/* 🟢 TOMBOL LOGIN MEMBER AREA */}
             <Link to="/login-member" className="hidden sm:flex px-4 py-2 bg-pink-50 text-pink-600 text-xs font-black rounded-xl border border-pink-100 hover:bg-pink-500 hover:text-white transition-all">
                Login Member
             </Link>
@@ -213,7 +218,13 @@ export default function GuestLaundry() {
               <a href="#promo" onClick={function() { setMenuOpen(false); }} className="px-4 py-3 text-sm font-semibold text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-xl">Promo</a>
               <a href="#faq" onClick={function() { setMenuOpen(false); }} className="px-4 py-3 text-sm font-semibold text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-xl">FAQ</a>
               <a href="#cek-status" onClick={function() { setMenuOpen(false); }} className="px-4 py-3 text-sm font-semibold text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-xl">Tracking</a>
-              {/* 🟢 TOMBOL BARU MOBILE: LOGIN MEMBER */}
+              
+              {/* 🟢 TOMBOL ADMIN MOBILE */}
+              <Link to="/login" onClick={function() { setMenuOpen(false); }} className="px-4 py-3 text-sm font-bold text-white bg-gray-800 rounded-xl mt-2 text-center">
+                👑 Login Admin
+              </Link>
+              
+              {/* 🟢 TOMBOL LOGIN MEMBER MOBILE */}
               <Link to="/login-member" onClick={function() { setMenuOpen(false); }} className="px-4 py-3 text-sm font-bold text-pink-600 border border-pink-100 rounded-xl mt-2 text-center">Login Member Area</Link>
               <a href={waLink} target="_blank" rel="noreferrer" className="px-4 py-3 bg-emerald-500 text-white text-sm font-bold rounded-xl text-center flex items-center justify-center gap-2 mt-2">
                 <FaWhatsapp size={18} /> Chat WhatsApp
@@ -242,7 +253,6 @@ export default function GuestLaundry() {
               Cuci, setrika, dry clean — mesin terpisah per pelanggan. Higienis, wangi, dan tepat waktu.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              {/* 🟢 TOMBOL YANG DIUBAH: KE DAFTAR MEMBER (CRM FLOW) */}
               <Link to="/register-member" className="group px-6 py-3.5 bg-pink-500 text-white text-sm font-bold rounded-2xl shadow-lg shadow-pink-200 hover:bg-pink-600 transition-all active:scale-95 flex items-center gap-2">
                 <MdLocalLaundryService size={18} /> Pesan Sekarang <MdArrowForward size={16} className="group-hover:translate-x-1 transition-transform" />
               </Link>
@@ -347,7 +357,6 @@ export default function GuestLaundry() {
                       <span className="text-2xl font-black text-gray-900">{s.price}</span>
                       <span className="text-xs font-semibold text-gray-400 mb-0.5">{s.unit}</span>
                     </div>
-                    {/* 🟢 TOMBOL YANG DIUBAH: KE DAFTAR MEMBER PER PAKET */}
                     <Link to="/register-member" className="w-full flex items-center justify-center gap-2 py-3 bg-pink-50 text-pink-600 text-xs font-bold rounded-xl hover:bg-pink-500 hover:text-white transition-all">
                       Ambil Paket Member
                     </Link>
@@ -415,7 +424,6 @@ export default function GuestLaundry() {
                      <div className="bg-white/20 p-2 rounded-lg min-w-[50px]"><span className="block text-xl font-black">{String(countdown.m).padStart(2, '0')}</span><span className="text-[8px] uppercase">Menit</span></div>
                      <div className="bg-white/20 p-2 rounded-lg min-w-[50px]"><span className="block text-xl font-black">{String(countdown.s).padStart(2, '0')}</span><span className="text-[8px] uppercase">Detik</span></div>
                   </div>
-                  {/* 🟢 TOMBOL BARU: KLAIM DI PROMO */}
                   <Link to="/register-member" className="inline-block px-6 py-2 bg-white text-pink-600 text-xs font-black rounded-full hover:bg-gray-50">Daftar Member Sekarang</Link>
                </div>
             </div>
@@ -550,6 +558,7 @@ export default function GuestLaundry() {
             <div>
                <h4 className="text-xs font-bold text-white mb-3">CRM & Member</h4>
                <ul className="space-y-2">
+                  <li><Link to="/login" className="text-xs font-medium text-gray-500 hover:text-pink-400 transition-colors">Login Admin</Link></li>
                   <li><Link to="/login-member" className="text-xs font-medium text-gray-500 hover:text-pink-400 transition-colors">Portal Login Member</Link></li>
                   <li><Link to="/register-member" className="text-xs font-medium text-gray-500 hover:text-pink-400 transition-colors">Daftar Member Baru</Link></li>
                </ul>

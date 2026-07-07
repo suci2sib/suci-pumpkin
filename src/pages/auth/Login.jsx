@@ -28,7 +28,7 @@ export default function Login() {
         localStorage.setItem("user_auth", JSON.stringify(loggedInUser));
         
         setTimeout(() => { 
-            navigate("/"); 
+            navigate("/admin"); 
             setLoading(false); 
         }, 1000);
       } else {

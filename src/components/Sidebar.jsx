@@ -8,7 +8,8 @@ import {
   MdBlock,
   MdAdd,
   MdShoppingBag,
-  MdAnalytics, // 1. Tambahkan ikon MdAnalytics untuk Fitur CRM
+  MdAnalytics,
+  MdPerson, // Untuk menu Users
 } from "react-icons/md";
 
 export default function Sidebar() {
@@ -73,6 +74,14 @@ export default function Sidebar() {
           className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
         >
           <MdAnalytics className="mr-3" size={22} /> Laundry Control
+        </NavLink>
+
+        {/* Users */}
+        <NavLink
+          to="/users"
+          className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
+        >
+          <MdPerson className="mr-3" size={22} /> Users
         </NavLink>
 
         {/* Section Error Tests */}
