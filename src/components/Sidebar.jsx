@@ -84,6 +84,14 @@ export default function Sidebar() {
           <MdPerson className="mr-3" size={22} /> Users
         </NavLink>
 
+        {/* Members */}
+        <NavLink
+          to="/members"
+          className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
+        >
+          <MdPeople className="mr-3" size={22} /> Members
+        </NavLink>
+
         {/* Section Error Tests */}
         <div className="pt-10 px-6 pb-2">
           <span className="text-[10px] font-black text-gray-300 uppercase tracking-widest">
