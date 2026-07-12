@@ -20,6 +20,7 @@ import {
   MdPlace,
   MdQuestionAnswer,
   MdKeyboardArrowDown,
+  MdFormatQuote,
 } from "react-icons/md";
 import { FaWhatsapp, FaInstagram, FaFacebookF } from "react-icons/fa";
 
@@ -77,6 +78,12 @@ export default function GuestLaundry() {
     { q: "Bagaimana kalau ada pakaian rusak atau hilang?", a: "Kami bertanggung jawab penuh. Jika terbukti kesalahan kami, ganti sesuai nilai pakaian (maks. 5x harga cuci)." },
     { q: "Parfum apa yang digunakan?", a: "Reguler: parfum standar segar. Premium: pilihan parfum import (Lavender, Cherry Blossom, Vanilla, Ocean Breeze)." },
     { q: "Apakah bisa request cuci terpisah pakaian dalam?", a: "Tentu! Minta pakaian dalam dicuci terpisah, tidak ada biaya tambahan. Informasikan saat order via WhatsApp." }
+  ];
+
+  var testimonials = [
+    { name: "Della Oktaviani", role: "Pemilik Kos Putri", text: "Layanan sangat cepat, cucian rapi, dan wangi. Saya pakai rutin setiap minggu untuk semua kebutuhan laundry rumah.", rating: 5 },
+    { name: "Suci Ramadani", role: "Ibu Rumah Tangga", text: "Hasilnya selalu bersih dan terjaga. Saya suka sistem satu mesin per pelanggan yang sangat higienis.", rating: 5 },
+    { name: "Ahmad Pratama", role: "Karyawan Swasta", text: "Saya sering pakai layanan express. Tepat waktu, praktis, dan hasilnya sangat memuaskan.", rating: 5 }
   ];
 
   var photos = {
@@ -188,6 +195,7 @@ export default function GuestLaundry() {
           </a>
           <div className="hidden md:flex items-center gap-6">
             <a href="#layanan" className="text-sm font-semibold text-gray-500 hover:text-pink-500 transition-colors">Layanan</a>
+            <a href="#testimoni" className="text-sm font-semibold text-gray-500 hover:text-pink-500 transition-colors">Testimoni</a>
             <a href="#promo" className="text-sm font-semibold text-gray-500 hover:text-pink-500 transition-colors">Promo</a>
             <a href="#faq" className="text-sm font-semibold text-gray-500 hover:text-pink-500 transition-colors">FAQ</a>
             <a href="#cek-status" className="text-sm font-semibold text-gray-500 hover:text-pink-500 transition-colors">Tracking</a>
@@ -215,6 +223,7 @@ export default function GuestLaundry() {
           <div className="md:hidden px-5 pb-4 border-t border-gray-100 bg-white">
             <div className="flex flex-col gap-1 pt-3">
               <a href="#layanan" onClick={function() { setMenuOpen(false); }} className="px-4 py-3 text-sm font-semibold text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-xl">Layanan</a>
+              <a href="#testimoni" onClick={function() { setMenuOpen(false); }} className="px-4 py-3 text-sm font-semibold text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-xl">Testimoni</a>
               <a href="#promo" onClick={function() { setMenuOpen(false); }} className="px-4 py-3 text-sm font-semibold text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-xl">Promo</a>
               <a href="#faq" onClick={function() { setMenuOpen(false); }} className="px-4 py-3 text-sm font-semibold text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-xl">FAQ</a>
               <a href="#cek-status" onClick={function() { setMenuOpen(false); }} className="px-4 py-3 text-sm font-semibold text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-xl">Tracking</a>
@@ -310,6 +319,38 @@ export default function GuestLaundry() {
                   />
                   <div className="absolute bottom-2.5 left-2.5 z-10">
                     <span className="bg-white/90 backdrop-blur text-gray-800 text-[10px] md:text-xs font-bold px-2.5 py-1.5 rounded-lg">{item.label}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONI PELANGGAN */}
+      <section id="testimoni" className="py-16 md:py-20 bg-gray-50 border-y border-gray-100">
+        <div className="max-w-7xl mx-auto px-5">
+          <div className="text-center mb-10">
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-pink-500 bg-pink-50 px-4 py-1.5 rounded-full">💬 Testimoni</span>
+            <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-3">Apa Kata Pelanggan Kami?</h2>
+            <p className="text-gray-400 text-sm font-medium mt-2">Kepuasan pelanggan adalah bukti kualitas layanan yang kami berikan.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {testimonials.map(function(item, i) {
+              return (
+                <div key={i} className="bg-white rounded-3xl border border-gray-100 p-6 shadow-sm hover:shadow-xl transition-all">
+                  <div className="flex items-center gap-1 text-amber-400 mb-4">
+                    {Array.from({ length: item.rating }).map(function(_, starIndex) {
+                      return <MdStar key={starIndex} size={18} />;
+                    })}
+                  </div>
+                  <div className="text-pink-500 mb-4">
+                    <MdFormatQuote size={24} />
+                  </div>
+                  <p className="text-sm leading-7 text-gray-600">“{item.text}”</p>
+                  <div className="mt-6">
+                    <p className="font-black text-gray-900">{item.name}</p>
+                    <p className="text-sm text-gray-400">{item.role}</p>
                   </div>
                 </div>
               );
